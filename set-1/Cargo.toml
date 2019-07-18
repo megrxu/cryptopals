@@ -9,3 +9,5 @@ edition = "2018"
 [dependencies]
 hex-literal = "0.2.0"
 hex = "*"
+lazy_static = "1.3.0"
+base64 = "*"
