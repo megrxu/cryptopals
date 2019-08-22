@@ -1,18 +1,20 @@
 use super::challenge_10_aes_cbc::aes_cbc_encrypt;
 use super::challenge_9_pkcs7::pkcs7_padding;
-use rand::Rng;
+use rand::distributions::{Standard, Uniform};
+use rand::{thread_rng, Rng};
 use set_1::challenge_7_aes_ecb::aes_ecb_encrypt;
 use std::collections::HashSet;
 
-/// Copied from https://github.com/quininer/aes/blob/master/tests/rand.rs
+/// Modified from https://github.com/quininer/aes/blob/master/tests/rand.rs
+
 #[macro_export]
 macro_rules! rand {
     ( _ ) => { ::rand::random() };
     ( $len:expr ) => {{
-        ::rand::thread_rng().gen_iter().take($len).collect::<Vec<_>>()
+        thread_rng().sample_iter(Standard).take($len).collect::<Vec<_>>()
     }};
-    ( choose $range:expr, $num:expr ) => {
-        ::rand::sample(&mut ::rand::thread_rng(), $range, $num)
+    ( choose $range:expr, $len:expr ) => {
+        thread_rng().sample_iter(Uniform::from($range)).take($len).collect::<Vec<_>>()
     };
     ( choose $range:expr ) => {
         rand!(choose $range, 1)[0]

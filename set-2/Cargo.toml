@@ -9,4 +9,4 @@ edition = "2018"
 [dependencies]
 eva-crypto = "*"
 set-1 = {path="../set-1/"}
-rand = "0.3"
+rand = "0.7.0"
