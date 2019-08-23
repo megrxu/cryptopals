@@ -1,6 +1,7 @@
-use set_2::challenge_12_byte_at_a_time::EncryptionOracle;
-use std::collections::{HashMap, HashSet};
 use set_1::challenge_1_base64::base64_decode;
+use set_2::challenge_11_detection_oracle::distinguisher;
+use set_2::challenge_12_byte_at_a_time::EncryptionOracle;
+use std::collections::HashMap;
 
 #[test]
 fn test_decrypt() {
@@ -20,11 +21,7 @@ fn test_decrypt() {
 
     // detect ECB
     let ciphertext = oracle.encrypt(&vec![b'A'; block_size * 3]);
-    let set = ciphertext
-        .chunks(block_size)
-        .map(|e| e.to_vec())
-        .collect::<HashSet<Vec<u8>>>();
-    assert_eq!(set.len() == ciphertext.len() / block_size, false);
+    assert_eq!(distinguisher(ciphertext), false);
 
     // decrypt
     let mut decrypted: Vec<u8> = vec![];
