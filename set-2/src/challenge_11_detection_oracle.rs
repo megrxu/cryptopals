@@ -1,7 +1,6 @@
 use super::challenge_10_aes_cbc::aes_cbc_encrypt;
 use super::challenge_9_pkcs7::pkcs7_padding;
-use rand::distributions::{Standard, Uniform};
-use rand::{thread_rng, Rng};
+use rand::Rng;
 use set_1::challenge_7_aes_ecb::aes_ecb_encrypt;
 use std::collections::HashSet;
 
@@ -11,10 +10,10 @@ use std::collections::HashSet;
 macro_rules! rand {
     ( _ ) => { ::rand::random() };
     ( $len:expr ) => {{
-        thread_rng().sample_iter(Standard).take($len).collect::<Vec<_>>()
+        ::rand::thread_rng().sample_iter(::rand::distributions::Standard).take($len).collect::<Vec<_>>()
     }};
     ( choose $range:expr, $len:expr ) => {
-        thread_rng().sample_iter(Uniform::from($range)).take($len).collect::<Vec<_>>()
+        ::rand::thread_rng().sample_iter(::rand::distributions::Uniform::from($range)).take($len).collect::<Vec<_>>()
     };
     ( choose $range:expr ) => {
         rand!(choose $range, 1)[0]
