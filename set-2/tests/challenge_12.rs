@@ -4,6 +4,7 @@ use set_2::challenge_12_byte_at_a_time::EncryptionOracle;
 use std::collections::HashMap;
 
 #[test]
+#[ignore]
 fn test_decrypt() {
     let oracle = EncryptionOracle::init();
 
