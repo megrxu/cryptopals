@@ -42,7 +42,7 @@ pub fn encryption_oracle(input: &[u8]) -> (bool, Vec<u8>) {
     }
 }
 
-pub fn distinguisher(ciphertext: Vec<u8>) -> bool {
+pub fn distinguisher(ciphertext: &Vec<u8>) -> bool {
     let set = ciphertext
         .chunks(16)
         .map(|e| e.to_vec())
