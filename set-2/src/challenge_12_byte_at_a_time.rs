@@ -1,4 +1,3 @@
-use super::challenge_10_aes_cbc::aes_cbc_encrypt;
 use super::challenge_9_pkcs7::pkcs7_padding;
 use rand::Rng;
 use set_1::challenge_1_base64::base64_decode;
