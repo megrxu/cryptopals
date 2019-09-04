@@ -1,19 +1,6 @@
 use set_1::challenge_2_fixed_xor::xor;
 use set_2::challenge_16_cbc_bitflipping::*;
 
-fn increment(faults: &mut Vec<u8>) {
-    let mut iter = faults.iter_mut();
-    while let Some(byte) = iter.next() {
-        if *byte == 0xff {
-            *byte = 0x00;
-            continue;
-        } else {
-            *byte += 1;
-            break;
-        }
-    }
-}
-
 #[test]
 fn test_input() {
     let oracle = EncryptionOracle::init();
