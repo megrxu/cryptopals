@@ -24,11 +24,11 @@ pub fn crack_key(data: &[u8]) -> (u8, String) {
 fn score(bytes: &[u8]) -> f32 {
     let imprintable = bytes
         .iter()
-        .filter(|&n| (*n < 32 && *n != b'\n') || *n >= 0x7f)
+        .filter(|&n| (*n < 32 && *n != b'\n') || *n >= 0x7f || *n == b'^')
         .count();
     if imprintable == 0 {
         bytes.iter().fold(0.0, |res, &b| {
-            res + CHAR_FREQ.get(&(b as char)).unwrap_or(&0.0)
+            res + CHAR_FREQ.get(&((b as char).to_ascii_lowercase())).unwrap_or(&0.0)
         })
     } else {
         0.0
