@@ -20,6 +20,3 @@ fn test_input() {
     assert!(oracle.is_admin(&c));
     assert_eq!(oracle.decrypt(&c)[32..48].to_vec(), b"00;admin=true;00");
 }
-
-#[test]
-fn attack() {}

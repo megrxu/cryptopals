@@ -1,5 +1,4 @@
-#[macro_use]
-extern crate hex_literal;
+use hex_literal::hex;
 use set_1::challenge_5_repeating_key_xor::repeating_key_xor_cipher;
 
 #[test]

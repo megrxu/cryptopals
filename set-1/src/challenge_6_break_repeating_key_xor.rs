@@ -1,4 +1,5 @@
 use super::challenge_2_fixed_xor::xor;
+use lazy_static::lazy_static;
 
 lazy_static! {
     pub static ref WEIGHT: [usize; 256] = {

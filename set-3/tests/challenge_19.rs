@@ -1,4 +1,3 @@
-use rand::Rng;
 use set_1::challenge_1_base64::base64_decode;
 use set_1::challenge_2_fixed_xor::xor;
 use set_3::challenge_19_fixed_nonce_ctr::*;

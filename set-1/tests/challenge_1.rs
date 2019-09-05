@@ -1,5 +1,4 @@
-#[macro_use]
-extern crate hex_literal;
+use hex_literal::hex;
 use set_1::challenge_1_base64::*;
 
 #[test]

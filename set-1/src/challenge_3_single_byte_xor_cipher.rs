@@ -1,5 +1,6 @@
 use super::challenge_2_fixed_xor::xor;
 use std::collections::HashMap;
+use lazy_static::lazy_static;
 
 pub fn crack_key(data: &[u8]) -> (u8, String) {
     let mut scores = [0.0; 256];

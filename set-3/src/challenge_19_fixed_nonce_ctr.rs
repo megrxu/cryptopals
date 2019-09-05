@@ -1,6 +1,8 @@
 use super::challenge_18_ctr_mode::*;
 use rand::Rng;
+use set_2::rand;
 
+#[derive(Default)]
 pub struct EncryptionOracle {
     key: Vec<u8>,
     nounce: u64,

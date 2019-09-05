@@ -4,6 +4,7 @@ use set_1::challenge_1_base64::base64_decode;
 use set_2::challenge_10_aes_cbc::*;
 use set_2::challenge_15_pkcs7_validation::*;
 use set_2::challenge_9_pkcs7::*;
+use set_2::rand;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 

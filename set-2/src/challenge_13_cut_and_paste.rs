@@ -57,7 +57,7 @@ impl FromStr for Pair {
     type Err = ParsePairError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let kv: Vec<&str> = s.split("=").collect();
+        let kv: Vec<&str> = s.split('=').collect();
         Ok(Pair(kv[0].to_string(), kv[1].parse().unwrap()))
     }
 }
@@ -75,7 +75,7 @@ impl ToString for Pair {
 }
 
 pub fn decode(input: &str) -> Vec<Pair> {
-    input.split("&").map(|kv| kv.parse().unwrap()).collect()
+    input.split('&').map(|kv| kv.parse().unwrap()).collect()
 }
 
 pub fn encode(input: Vec<Pair>) -> String {

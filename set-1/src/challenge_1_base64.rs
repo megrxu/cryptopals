@@ -1,4 +1,5 @@
 use base64 as bs64;
+use lazy_static::lazy_static;
 
 // implement base64 encode by hand
 lazy_static! {
