@@ -1,5 +1,3 @@
-extern crate lazy_static;
-
 pub mod challenge_1_base64;
 pub mod challenge_2_fixed_xor;
 pub mod challenge_3_single_byte_xor_cipher;

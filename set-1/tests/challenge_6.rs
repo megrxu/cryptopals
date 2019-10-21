@@ -1,5 +1,3 @@
-extern crate hex;
-
 use set_1::challenge_1_base64::*;
 use set_1::challenge_3_single_byte_xor_cipher::crack_key;
 use set_1::challenge_5_repeating_key_xor::*;
@@ -32,7 +30,7 @@ fn challenge_6() {
     // Find key bytes
     let mut key: Vec<u8> = vec![];
     for cols in transposed_data.iter() {
-        key.push(crack_key(&cols[0..10]).0);
+        key.push(crack_key(&cols[0..]).0);
     }
 
     // Check solution

@@ -9,4 +9,4 @@ matrix:
   fast_finish: true
 script:
   - cargo build --verbose --all
-  - cargo test --verbose --all -- --ignored
+  - travis_retry cargo test --verbose --all -- --ignored # Since some tests have rate to be failed.
