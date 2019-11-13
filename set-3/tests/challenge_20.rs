@@ -2,7 +2,6 @@ use set_1::challenge_1_base64::base64_decode;
 use set_1::challenge_2_fixed_xor::xor;
 use set_1::challenge_3_single_byte_xor_cipher::crack_key;
 use set_3::challenge_19_fixed_nonce_ctr::*;
-use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
