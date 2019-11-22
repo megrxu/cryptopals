@@ -1,27 +1,27 @@
 use std::cell::RefCell;
 use std::num::Wrapping;
 
-const W: usize = 32;
-const N: usize = 624;
-const M: usize = 397;
-const R: usize = 31;
-const A: u32 = 0x9908B0DF;
-const F: u32 = 1812433253;
-const U: u32 = 11;
-const D: u32 = 0xFFFFFFFF;
-const S: u32 = 7;
-const B: u32 = 0x9D2C5680;
-const T: u32 = 15;
-const C: u32 = 0xEFC60000;
-const L: u32 = 18;
+pub const W: usize = 32;
+pub const N: usize = 624;
+pub const M: usize = 397;
+pub const R: usize = 31;
+pub const A: u32 = 0x9908B0DF;
+pub const F: u32 = 1812433253;
+pub const U: u32 = 11;
+pub const D: u32 = 0xFFFFFFFF;
+pub const S: u32 = 7;
+pub const B: u32 = 0x9D2C5680;
+pub const T: u32 = 15;
+pub const C: u32 = 0xEFC60000;
+pub const L: u32 = 18;
 
-const LOWER_MASK: u32 = (1 << R) - 1;
-const UPPER_MASK: u32 = !LOWER_MASK;
+pub const LOWER_MASK: u32 = (1 << R) - 1;
+pub const UPPER_MASK: u32 = !LOWER_MASK;
 
 pub struct MTRNG {
     seed: u32,
     index: RefCell<usize>,
-    mt: RefCell<[u32; N]>,
+    pub mt: RefCell<[u32; N]>,
 }
 
 impl MTRNG {
@@ -32,6 +32,7 @@ impl MTRNG {
             mt: RefCell::new([0u32; N]),
         };
         rng.seed_mt();
+        rng.twist();
         rng
     }
 
