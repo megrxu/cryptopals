@@ -36,18 +36,25 @@ impl MTRNG {
         rng
     }
 
+    pub fn reset(&self) {
+        self.index.replace(N);
+        self.seed_mt();
+        self.twist();
+    }
+
     pub fn extract(&self) -> u32 {
         if self.index.eq(&RefCell::new(N)) {
             self.twist();
         };
 
         let mt = self.mt.borrow();
+        println!("{:x?}", &mt[0..5]);
         let mut index = self.index.borrow_mut();
         let mut y = mt[*index];
-        y = y ^ ((y >> U) & D);
-        y = y ^ ((y << S) & B);
-        y = y ^ ((y >> T) & C);
-        y = y ^ (y >> L);
+        y ^= (y >> U) & D;
+        y ^= (y << S) & B;
+        y ^= (y << T) & C;
+        y ^= y >> L;
 
         *index += 1;
         y
