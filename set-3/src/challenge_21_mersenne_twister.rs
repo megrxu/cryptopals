@@ -48,7 +48,6 @@ impl MTRNG {
         };
 
         let mt = self.mt.borrow();
-        println!("{:x?}", &mt[0..5]);
         let mut index = self.index.borrow_mut();
         let mut y = mt[*index];
         y ^= (y >> U) & D;
@@ -63,9 +62,10 @@ impl MTRNG {
     fn seed_mt(&self) {
         let mut mt = self.mt.borrow_mut();
         mt[0] = self.seed;
+        let x = Wrapping(F);
         for i in 1..N {
-            let (x, y) = (Wrapping(F), Wrapping(mt[i - 1] ^ (mt[i - 1] >> (W - 2))));
-            mt[i] = (x * y).0 + i as u32;
+            let y = Wrapping(mt[i - 1] ^ (mt[i - 1] >> (W - 2)));
+            mt[i] = (x * y + Wrapping(i as u32)).0  as u32;
         }
     }
 
