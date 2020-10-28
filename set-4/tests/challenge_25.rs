@@ -1,5 +1,6 @@
 use rand::{prelude::*, thread_rng, Rng};
 use set_1::challenge_1_base64::base64_decode;
+use set_1::challenge_2_fixed_xor::xor;
 use set_2::challenge_10_aes_cbc::*;
 use set_2::challenge_15_pkcs7_validation::*;
 use set_2::rand;
@@ -7,7 +8,6 @@ use set_3::challenge_18_ctr_mode::*;
 use set_4::challenge_25_rawctr::*;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use set_1::challenge_2_fixed_xor::xor;
 
 fn get_plaintext() -> String {
     let fc = File::open("data/25.txt").unwrap();

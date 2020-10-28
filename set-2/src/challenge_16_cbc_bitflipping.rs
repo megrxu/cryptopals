@@ -1,8 +1,8 @@
 use super::challenge_10_aes_cbc::*;
 use super::challenge_15_pkcs7_validation::*;
 use super::challenge_9_pkcs7::*;
-use rand::Rng;
 use super::rand;
+use rand::Rng;
 
 pub struct EncryptionOracle {
     key: Vec<u8>,

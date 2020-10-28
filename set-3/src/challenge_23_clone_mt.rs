@@ -8,7 +8,7 @@ pub fn untamper(output: u32) -> u32 {
     // y = y ^ ((y << T) & C);
     let l15 = y & (0xffffffff >> (32 - T));
     let l30 = ((l15 << T) & C ^ y) & (0xffffffff >> (32 - T)) << T;
-    let l32 = ((l30 << T) & C ^ y) & (0xffffffff >> (32 - T) << (T * 2)) ;
+    let l32 = ((l30 << T) & C ^ y) & (0xffffffff >> (32 - T) << (T * 2));
     y = l32 | l30 | l15;
 
     // y = y ^ ((y << S) & B);

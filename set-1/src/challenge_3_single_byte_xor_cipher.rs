@@ -1,12 +1,12 @@
 use super::challenge_2_fixed_xor::xor;
-use std::collections::HashMap;
 use lazy_static::lazy_static;
+use std::collections::HashMap;
 
 pub fn crack_key(data: &[u8]) -> (u8, String) {
     let mut scores = [0.0; 256];
-    for i in 0..256 {
+    for (i, item) in scores.iter_mut().enumerate() {
         let key: Vec<u8> = vec![i as u8; data.len()];
-        scores[i] = score(&xor(&data, &key));
+        *item = score(&xor(&data, &key));
     }
     let mut max_idx = 0;
     for i in 0..256 {
@@ -28,7 +28,9 @@ fn score(bytes: &[u8]) -> f32 {
         .count();
     if imprintable == 0 {
         bytes.iter().fold(0.0, |res, &b| {
-            res + CHAR_FREQ.get(&((b as char).to_ascii_lowercase())).unwrap_or(&0.0)
+            res + CHAR_FREQ
+                .get(&((b as char).to_ascii_lowercase()))
+                .unwrap_or(&0.0)
         })
     } else {
         0.0

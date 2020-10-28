@@ -3,9 +3,8 @@ use rand::{thread_rng, Rng};
 use set_1::challenge_2_fixed_xor::xor;
 use set_2::rand;
 use set_3::challenge_21_mersenne_twister::*;
-use set_3::challenge_24_mt_stream_cipher::*;
 use set_3::challenge_23_clone_mt::*;
-
+use set_3::challenge_24_mt_stream_cipher::*;
 
 #[test]
 fn encrypt_and_decrypt() {
@@ -44,7 +43,7 @@ fn crack_key() {
     let len = mt_prime.len();
 
     // How to untwist once? By brute force? Really?
-    let mut guess : u16 = 0;
+    let mut guess: u16 = 0;
     for i in 0..0xffff {
         let rng = MTRNG::new(i as u32);
         // By brute force...
