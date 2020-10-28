@@ -1,5 +1,5 @@
 # the cryptopals crypto challenges
 
-[![status](https://api.travis-ci.org/megrxu/crypto-challenges.svg?branch=master)](https://travis-ci.org/megrxu/crypto-challenges)
+[![status](https://github.com/megrxu/crypto-challenges/workflows/CI/badge.svg)](https://github.com/megrxu/crypto-challenges/actions)
 
 https://cryptopals.com/
