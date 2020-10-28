@@ -1,0 +1,14 @@
+[package]
+name = "set-4"
+version = "0.1.0"
+authors = ["Ray Xu <megrxu@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+set-1 = {path="../set-1/"}
+set-2 = {path="../set-2/"}
+set-3 = {path="../set-3/"}
+eva-crypto = "*"
+rand = "0.7.0"
