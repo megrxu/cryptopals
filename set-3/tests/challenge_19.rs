@@ -38,10 +38,7 @@ fn try_decrypt() {
     }
     let letters = b"Ho   o e".to_vec();
     let keystream = xor(&set, &letters);
-    let ps = cs
-        .iter()
-        .map(|c| xor(c, &keystream))
-        .collect::<Vec<Vec<u8>>>();
+    let ps = cs.iter().map(|c| xor(c, &keystream)).collect::<Vec<Vec<u8>>>();
     for p in ps {
         println!("{:x?}", String::from_utf8(p));
     }

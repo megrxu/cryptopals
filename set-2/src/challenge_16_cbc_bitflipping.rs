@@ -11,10 +11,7 @@ pub struct EncryptionOracle {
 
 impl EncryptionOracle {
     pub fn init() -> Self {
-        EncryptionOracle {
-            key: rand!(16),
-            iv: rand!(16),
-        }
+        EncryptionOracle { key: rand!(16), iv: rand!(16) }
     }
 
     pub fn encrypt(&self, input: &[u8]) -> Vec<u8> {
@@ -30,11 +27,7 @@ impl EncryptionOracle {
     fn construct(input: &[u8]) -> Vec<u8> {
         let mut before = b"comment1=cooking%20MCs;userdata=".to_vec();
         let mut after = b";comment2=%20like%20a%20pound%20of%20bacon".to_vec();
-        let mut trimed = input
-            .iter()
-            .cloned()
-            .filter(|&c| c != b';' && c != b'=')
-            .collect();
+        let mut trimed = input.iter().cloned().filter(|&c| c != b';' && c != b'=').collect();
         before.append(&mut trimed);
         before.append(&mut after);
         before

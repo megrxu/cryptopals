@@ -38,16 +38,9 @@ pub fn find_keysize(data: &[u8]) -> Vec<usize> {
 
     // Sort keysize by the hamming distance
     let mut keysizes: Vec<usize> = (2..40).collect();
-    keysizes.sort_by(|&a, &b| {
-        hamming_distances[a - 2]
-            .partial_cmp(&hamming_distances[b - 2])
-            .unwrap()
-    });
+    keysizes
+        .sort_by(|&a, &b| hamming_distances[a - 2].partial_cmp(&hamming_distances[b - 2]).unwrap());
 
     // Take first 3 most possible keysize
-    keysizes
-        .into_iter()
-        .zip([0; 3].iter())
-        .map(|(e1, _)| e1)
-        .collect()
+    keysizes.into_iter().zip([0; 3].iter()).map(|(e1, _)| e1).collect()
 }

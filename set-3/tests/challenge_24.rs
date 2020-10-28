@@ -16,10 +16,7 @@ fn encrypt_and_decrypt() {
 }
 
 fn generate_input() -> Vec<u8> {
-    let head: String = thread_rng()
-        .sample_iter(&Alphanumeric)
-        .take(rand!(choose 5..10))
-        .collect();
+    let head: String = thread_rng().sample_iter(&Alphanumeric).take(rand!(choose 5..10)).collect();
     (head + "AAAAAAAAAAAAAA").as_bytes().to_vec()
 }
 

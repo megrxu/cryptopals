@@ -52,9 +52,11 @@ fn test_decrypt() {
     decrypted = decrypted.into_iter().filter(|&n| n != 0xff).collect();
 
     // compare and show
-    assert_eq!(decrypted, base64_decode(&"Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkgaGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBqdXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUgYnkK"));
-    println!(
-        "{:?}",
-        String::from_utf8(decrypted).unwrap_or("Failed".into())
+    assert_eq!(
+        decrypted,
+        base64_decode(
+            &"Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkgaGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBqdXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUgYnkK"
+        )
     );
+    println!("{:?}", String::from_utf8(decrypted).unwrap_or("Failed".into()));
 }

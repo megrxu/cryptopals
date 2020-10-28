@@ -10,10 +10,7 @@ pub struct EncryptionOracle {
 
 impl EncryptionOracle {
     pub fn new() -> Self {
-        EncryptionOracle {
-            key: rand!(16),
-            nounce: 0,
-        }
+        EncryptionOracle { key: rand!(16), nounce: 0 }
     }
 
     pub fn encrypt(&self, plaintext: &[u8]) -> Vec<u8> {

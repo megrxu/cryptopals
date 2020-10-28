@@ -43,9 +43,6 @@ pub fn encryption_oracle(input: &[u8]) -> (bool, Vec<u8>) {
 }
 
 pub fn distinguisher(ciphertext: &[u8]) -> bool {
-    let set = ciphertext
-        .chunks(16)
-        .map(|e| e.to_vec())
-        .collect::<HashSet<Vec<u8>>>();
+    let set = ciphertext.chunks(16).map(|e| e.to_vec()).collect::<HashSet<Vec<u8>>>();
     set.len() == ciphertext.len() / 16
 }

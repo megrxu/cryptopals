@@ -16,10 +16,7 @@ pub struct EncryptionOracle {
 
 impl EncryptionOracle {
     pub fn new() -> Self {
-        EncryptionOracle {
-            iv: rand!(16),
-            key: rand!(16),
-        }
+        EncryptionOracle { iv: rand!(16), key: rand!(16) }
     }
 
     pub fn encrypt(&self, input: &[u8]) -> Vec<u8> {
@@ -36,11 +33,5 @@ impl EncryptionOracle {
 pub fn choose_one() -> Vec<u8> {
     let fc = File::open("data/17.txt").unwrap();
     let mut rng = rand::thread_rng();
-    base64_decode(
-        &BufReader::new(fc)
-            .lines()
-            .choose(&mut rng)
-            .unwrap()
-            .unwrap(),
-    )
+    base64_decode(&BufReader::new(fc).lines().choose(&mut rng).unwrap().unwrap())
 }

@@ -11,20 +11,14 @@ fn code_correct() {
         encode(decode("foo=1.2&baz=true&zap=zazzle&false=1231213"))
     );
 
-    assert_eq!(
-        encode(profile_for("foo@bar.com&==")),
-        "email=foo@bar.com&uid=10&role=user"
-    )
+    assert_eq!(encode(profile_for("foo@bar.com&==")), "email=foo@bar.com&uid=10&role=user")
 }
 
 #[test]
 fn it_works() {
     let email = "foo@bar.com";
     let key: Vec<u8> = rand!(16);
-    let provide = aes_ecb_encrypt(
-        &pkcs7_padding(encode(profile_for(email)).as_bytes(), 16),
-        &key,
-    );
+    let provide = aes_ecb_encrypt(&pkcs7_padding(encode(profile_for(email)).as_bytes(), 16), &key);
     let profile = String::from_utf8(aes_ecb_decrypt(&provide, &key)).unwrap();
     println!("{:?}", profile);
 }

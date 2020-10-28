@@ -80,11 +80,7 @@ pub fn decode(input: &str) -> Vec<Pair> {
 
 pub fn encode(input: Vec<Pair>) -> String {
     input.iter().fold("".to_string(), |res, next| {
-        if res != "" {
-            res + "&" + &next.to_string()
-        } else {
-            next.to_string()
-        }
+        if res != "" { res + "&" + &next.to_string() } else { next.to_string() }
     })
 }
 

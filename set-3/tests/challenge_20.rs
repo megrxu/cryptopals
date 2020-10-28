@@ -9,17 +9,11 @@ use std::io::{BufRead, BufReader};
 fn decrypt_statistical() {
     let fc = File::open("data/20.txt").unwrap();
     let oracle = EncryptionOracle::new();
-    let ps: Vec<Vec<u8>> = BufReader::new(fc)
-        .lines()
-        .map(|line| base64_decode(&line.unwrap()))
-        .collect();
+    let ps: Vec<Vec<u8>> =
+        BufReader::new(fc).lines().map(|line| base64_decode(&line.unwrap())).collect();
     let cs: Vec<Vec<u8>> = ps.iter().map(|p| oracle.encrypt(p)).collect();
 
-    let length = ps
-        .iter()
-        .max_by(|x, y| y.len().cmp(&x.len()))
-        .unwrap()
-        .len();
+    let length = ps.iter().max_by(|x, y| y.len().cmp(&x.len())).unwrap().len();
 
     let mut cols: Vec<Vec<u8>> = vec![vec![]; cs.len()];
     let mut guessed_key = vec![];

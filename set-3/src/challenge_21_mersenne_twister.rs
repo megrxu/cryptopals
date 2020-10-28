@@ -26,11 +26,7 @@ pub struct MTRNG {
 
 impl MTRNG {
     pub fn new(seed: u32) -> Self {
-        let rng = MTRNG {
-            seed,
-            index: RefCell::from(N),
-            mt: RefCell::new([0u32; N]),
-        };
+        let rng = MTRNG { seed, index: RefCell::from(N), mt: RefCell::new([0u32; N]) };
         rng.seed_mt();
         rng.twist();
         rng
@@ -72,10 +68,7 @@ impl MTRNG {
     fn twist(&self) {
         let mut mt = self.mt.borrow_mut();
         for i in 0..N {
-            let (a, b) = (
-                Wrapping(mt[i] & UPPER_MASK),
-                Wrapping((mt[(i + 1) % N]) & LOWER_MASK),
-            );
+            let (a, b) = (Wrapping(mt[i] & UPPER_MASK), Wrapping((mt[(i + 1) % N]) & LOWER_MASK));
             let x = (a + b).0;
             let mut xa = x >> 1;
             if x % 2 != 0 {

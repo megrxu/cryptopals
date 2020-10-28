@@ -6,9 +6,7 @@ pub struct TrivialStreamCipher {
 
 impl TrivialStreamCipher {
     pub fn new(seed: u16) -> Self {
-        TrivialStreamCipher {
-            rng: MTRNG::new(seed as u32),
-        }
+        TrivialStreamCipher { rng: MTRNG::new(seed as u32) }
     }
 
     pub fn encrypt(&self, p: &[u8]) -> Vec<u8> {
