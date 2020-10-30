@@ -1,18 +1,31 @@
 use std::convert::TryInto;
 
+pub fn sha1_mac(key: &[u8], msg: &[u8]) -> [u32; 5] {
+    let mut km = vec![];
+    km.append(&mut key.into());
+    km.append(&mut msg.into());
+    sha1(&km)
+}
+
 pub fn sha1(msg: &[u8]) -> [u32; 5] {
-    let padded = sha1_padding(msg);
     let mut h = (0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0);
+    let padded = sha1_padding(msg);
+    h = sha1_continue(&padded, h);
+    [h.0, h.1, h.2, h.3, h.4]
+}
+
+pub fn sha1_continue(msg: &[u32], h: (u32, u32, u32, u32, u32)) -> (u32, u32, u32, u32, u32) {
     let mut buffer: (u32, u32, u32, u32, u32);
     let mut w = [0u32; 80];
+    let mut h = h;
 
-    for m in padded.chunks(16) {
+    for m in msg.chunks(16) {
         w[..16].clone_from_slice(&m[..16]);
         for t in 16..80 {
             w[t] = (w[t - 3] ^ w[t - 8] ^ w[t - 14] ^ w[t - 16]).rotate_left(1);
         }
-        buffer = (h.0, h.1, h.2, h.3, h.4);
-        for (t, _) in w.iter().enumerate() {
+        buffer = h;
+        for (t, &item) in w.iter().enumerate() {
             buffer = (
                 (buffer.0)
                     .rotate_left(5)
@@ -20,7 +33,7 @@ pub fn sha1(msg: &[u8]) -> [u32; 5] {
                     .0
                     .overflowing_add(buffer.4)
                     .0
-                    .overflowing_add(w[t])
+                    .overflowing_add(item)
                     .0
                     .overflowing_add(k(t))
                     .0,
@@ -36,9 +49,9 @@ pub fn sha1(msg: &[u8]) -> [u32; 5] {
             h.2.overflowing_add(buffer.2).0,
             h.3.overflowing_add(buffer.3).0,
             h.4.overflowing_add(buffer.4).0,
-        )
+        );
     }
-    [h.0, h.1, h.2, h.3, h.4]
+    h
 }
 
 fn f(t: usize, b: u32, c: u32, d: u32) -> u32 {
@@ -61,7 +74,7 @@ fn k(t: usize) -> u32 {
     }
 }
 
-fn sha1_padding(msg: &[u8]) -> Vec<u32> {
+pub fn sha1_padding(msg: &[u8]) -> Vec<u32> {
     let len = msg.len();
     let rem = (len + 1) % 64;
     let zero_len = if rem <= 56 { 56 - rem } else { 120 - rem };
@@ -73,11 +86,14 @@ fn sha1_padding(msg: &[u8]) -> Vec<u32> {
     padded.chunks(4).map(|chunk| u32::from_be_bytes(chunk.try_into().unwrap())).collect()
 }
 
+pub fn to_array(h: (u32, u32, u32, u32, u32)) -> [u32; 5] {
+    [h.0, h.1, h.2, h.3, h.4]
+}
+
 #[test]
 fn test_padding() {
     let msg = b"abc";
     let padded = sha1_padding(msg);
-    padded.iter().for_each(|x| println!("{:08x?}", x));
     assert_eq!(padded.len() % 16, 0);
 
     println!("{:x?}", sha1(msg));

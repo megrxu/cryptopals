@@ -8,3 +8,9 @@ fn test_sha1() {
         [0x84983e44, 0x1c3bd26e, 0xbaae4aa1, 0xf95129e5, 0xe54670f1]
     );
 }
+
+#[test]
+fn test_sha1_mac() {
+    assert_ne!(sha1_mac(b"key", b"abc"), sha1_mac(b"key", b"abcd"));
+    assert_ne!(sha1_mac(b"key", b"abc"), sha1_mac(b"key'", b"abc"));
+}
