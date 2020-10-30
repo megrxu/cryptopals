@@ -1,7 +1,6 @@
 use rand::Rng;
 use set_2::rand;
 use set_4::challenge_28_sha1_mac::*;
-use std::convert::TryInto;
 
 #[test]
 fn poc() {
