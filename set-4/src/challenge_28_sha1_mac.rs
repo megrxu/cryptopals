@@ -1,5 +1,10 @@
 use std::convert::TryInto;
 
+pub enum Endian {
+    Big,
+    Lit,
+}
+
 pub fn sha1_mac(key: &[u8], msg: &[u8]) -> [u32; 5] {
     let mut km = vec![];
     km.append(&mut key.into());
@@ -9,7 +14,7 @@ pub fn sha1_mac(key: &[u8], msg: &[u8]) -> [u32; 5] {
 
 pub fn sha1(msg: &[u8]) -> [u32; 5] {
     let mut h = (0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0);
-    let padded = sha1_padding(msg);
+    let padded = sha1_padding(msg, Endian::Big);
     h = sha1_continue(&padded, h);
     [h.0, h.1, h.2, h.3, h.4]
 }
@@ -74,7 +79,7 @@ fn k(t: usize) -> u32 {
     }
 }
 
-pub fn sha1_padding(msg: &[u8]) -> Vec<u32> {
+pub fn sha1_padding(msg: &[u8], endian: Endian) -> Vec<u32> {
     let len = msg.len();
     let rem = (len + 1) % 64;
     let zero_len = if rem <= 56 { 56 - rem } else { 120 - rem };
@@ -83,7 +88,13 @@ pub fn sha1_padding(msg: &[u8]) -> Vec<u32> {
     padded.push(0x80);
     padded.append(&mut vec![0; zero_len]);
     padded.append(&mut msg_len);
-    padded.chunks(4).map(|chunk| u32::from_be_bytes(chunk.try_into().unwrap())).collect()
+    padded
+        .chunks(4)
+        .map(|chunk| match endian {
+            Endian::Big => u32::from_be_bytes(chunk.try_into().unwrap()),
+            Endian::Lit => u32::from_le_bytes(chunk.try_into().unwrap()),
+        })
+        .collect()
 }
 
 pub fn to_array(h: (u32, u32, u32, u32, u32)) -> [u32; 5] {
@@ -93,7 +104,7 @@ pub fn to_array(h: (u32, u32, u32, u32, u32)) -> [u32; 5] {
 #[test]
 fn test_padding() {
     let msg = b"abc";
-    let padded = sha1_padding(msg);
+    let padded = sha1_padding(msg, Endian::Big);
     assert_eq!(padded.len() % 16, 0);
 
     println!("{:x?}", sha1(msg));

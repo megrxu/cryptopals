@@ -9,7 +9,7 @@ fn poc() {
     let mac = sha1_mac(&key, msg);
     let mut key_msg = key.to_vec();
     key_msg.append(&mut msg.to_vec());
-    let padded_msg = sha1_padding(&key_msg);
+    let padded_msg = sha1_padding(&key_msg, Endian::Big);
 
     // the continuation
     let h = (mac[0], mac[1], mac[2], mac[3], mac[4]);
@@ -21,7 +21,7 @@ fn poc() {
     new_msg[16 + msg.len()] = 0x80;
     new_msg[120..128].copy_from_slice(&(((msg.len() + 16) * 8) as u64).to_be_bytes());
 
-    let padded_new_msg = sha1_padding(&new_msg);
+    let padded_new_msg = sha1_padding(&new_msg, Endian::Big);
 
     // check the padded msg
     assert_eq!(padded_msg, padded_new_msg[0..32]);
@@ -51,7 +51,7 @@ fn attack_prefix_with_random_key() {
         new_msg[key_size + msg.len()] = 0x80;
         new_msg[120..128].copy_from_slice(&(((msg.len() + key_size) * 8) as u64).to_be_bytes());
 
-        let padded_new_msg = sha1_padding(&new_msg);
+        let padded_new_msg = sha1_padding(&new_msg, Endian::Big);
 
         // check the new_mac is identical to the desired one without knowing the key
         let new_mac = to_array(sha1_continue(&padded_new_msg[32..], h));
