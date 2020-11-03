@@ -1,17 +1,17 @@
-use super::challenge_28_sha1_mac::{sha1_padding, Endian};
+use super::challenge_28_sha1_mac::{from_u32_vec, sha1_padding, Endian};
 
-pub fn md4_mac(key: &[u8], msg: &[u8]) -> [u32; 4] {
+pub fn md4_mac(key: &[u8], msg: &[u8]) -> Vec<u8> {
     let mut km = vec![];
     km.append(&mut key.into());
     km.append(&mut msg.into());
     md4(&km)
 }
 
-pub fn md4(msg: &[u8]) -> [u32; 4] {
+pub fn md4(msg: &[u8]) -> Vec<u8> {
     let h = (0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476);
     let padded = sha1_padding(msg, Endian::Lit);
     let res = md4_continue(&padded, h);
-    [res.0, res.1, res.2, res.3]
+    from_u32_vec(&[res.0, res.1, res.2, res.3], Endian::Lit)
 }
 
 // tiny auxiliary functions

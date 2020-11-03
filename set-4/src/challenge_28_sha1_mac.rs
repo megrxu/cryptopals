@@ -5,18 +5,18 @@ pub enum Endian {
     Lit,
 }
 
-pub fn sha1_mac(key: &[u8], msg: &[u8]) -> [u32; 5] {
+pub fn sha1_mac(key: &[u8], msg: &[u8]) -> Vec<u8> {
     let mut km = vec![];
     km.append(&mut key.into());
     km.append(&mut msg.into());
     sha1(&km)
 }
 
-pub fn sha1(msg: &[u8]) -> [u32; 5] {
+pub fn sha1(msg: &[u8]) -> Vec<u8> {
     let mut h = (0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0);
     let padded = sha1_padding(msg, Endian::Big);
     h = sha1_continue(&padded, h);
-    [h.0, h.1, h.2, h.3, h.4]
+    from_u32_vec(&[h.0, h.1, h.2, h.3, h.4], Endian::Big)
 }
 
 pub fn sha1_continue(msg: &[u32], h: (u32, u32, u32, u32, u32)) -> (u32, u32, u32, u32, u32) {
@@ -84,7 +84,10 @@ pub fn sha1_padding(msg: &[u8], endian: Endian) -> Vec<u32> {
     let rem = (len + 1) % 64;
     let zero_len = if rem <= 56 { 56 - rem } else { 120 - rem };
     let mut padded = msg.to_vec();
-    let mut msg_len = ((len * 8) as u64).to_be_bytes().to_vec();
+    let mut msg_len = match endian {
+        Endian::Big => ((len * 8) as u64).to_be_bytes().to_vec(),
+        Endian::Lit => ((len * 8) as u64).to_le_bytes().to_vec(),
+    };
     padded.push(0x80);
     padded.append(&mut vec![0; zero_len]);
     padded.append(&mut msg_len);
@@ -97,8 +100,27 @@ pub fn sha1_padding(msg: &[u8], endian: Endian) -> Vec<u32> {
         .collect()
 }
 
-pub fn to_array(h: (u32, u32, u32, u32, u32)) -> [u32; 5] {
-    [h.0, h.1, h.2, h.3, h.4]
+pub fn to_vec(h: (u32, u32, u32, u32, u32)) -> Vec<u8> {
+    from_u32_vec(&[h.0, h.1, h.2, h.3, h.4], Endian::Big)
+}
+
+pub fn from_u32_vec(src: &[u32], endian: Endian) -> Vec<u8> {
+    src.iter()
+        .map(|&i| match endian {
+            Endian::Big => i.to_be_bytes(),
+            Endian::Lit => i.to_le_bytes(),
+        })
+        .collect::<Vec<[u8; 4]>>()
+        .concat()
+}
+
+pub fn to_u32_vec(src: &[u8], endian: Endian) -> Vec<u32> {
+    src.chunks(4)
+        .map(|i| match endian {
+            Endian::Big => u32::from_be_bytes(i.try_into().unwrap()),
+            Endian::Lit => u32::from_le_bytes(i.try_into().unwrap()),
+        })
+        .collect()
 }
 
 #[test]

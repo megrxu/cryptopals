@@ -12,6 +12,7 @@ fn poc() {
     let padded_msg = sha1_padding(&key_msg, Endian::Big);
 
     // the continuation
+    let mac = to_u32_vec(&mac, Endian::Big);
     let h = (mac[0], mac[1], mac[2], mac[3], mac[4]);
 
     let inject = b";admin=true;";
@@ -27,7 +28,7 @@ fn poc() {
     assert_eq!(padded_msg, padded_new_msg[0..32]);
 
     // check the new_mac is identical to the desired one without knowing the key
-    let new_mac = to_array(sha1_continue(&padded_new_msg[32..], h));
+    let new_mac = to_vec(sha1_continue(&padded_new_msg[32..], h));
     assert_eq!(new_mac, sha1_mac(&key, &new_msg[16..]));
 }
 
@@ -40,6 +41,7 @@ fn attack_prefix_with_random_key() {
     key_msg.append(&mut msg.to_vec());
 
     // the continuation
+    let mac = to_u32_vec(&mac, Endian::Big);
     let h = (mac[0], mac[1], mac[2], mac[3], mac[4]);
 
     let inject = b";admin=true;";
@@ -54,7 +56,7 @@ fn attack_prefix_with_random_key() {
         let padded_new_msg = sha1_padding(&new_msg, Endian::Big);
 
         // check the new_mac is identical to the desired one without knowing the key
-        let new_mac = to_array(sha1_continue(&padded_new_msg[32..], h));
+        let new_mac = to_vec(sha1_continue(&padded_new_msg[32..], h));
         if new_mac == sha1_mac(&key, &new_msg[key_size..]) {
             success = true;
             println!("Key size is {}", key_size);

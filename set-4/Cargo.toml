@@ -12,3 +12,4 @@ set-2 = {path="../set-2/"}
 set-3 = {path="../set-3/"}
 eva-crypto = "*"
 rand = "0.7.0"
+hex-literal = "*"
