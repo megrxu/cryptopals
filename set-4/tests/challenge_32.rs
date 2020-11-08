@@ -5,7 +5,6 @@ use set_4::challenge_28_sha1_mac::sha1;
 use set_4::challenge_30_md4_mac::md4;
 use set_4::challenge_31_hmac::hmac;
 use std::cmp::Ordering;
-use std::iter;
 
 #[test]
 fn test_hmac() {
