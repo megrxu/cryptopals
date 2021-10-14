@@ -1,4 +1,6 @@
 use num_traits::{FromPrimitive, One, Zero};
+use rand::Rng;
+use set_2::rand;
 use set_4::challenge_28_sha1_mac::sha1;
 use set_5::challenge_33_dh::*;
 
@@ -9,14 +11,14 @@ fn test_dh_mitm_g_one() {
     let g = uinf::from_u8(2).unwrap();
 
     // A generate skey
-    let a = uinf::gen();
+    let a = uinf::from_bytes_be(&rand!(4));
     let a_key = DHKey::new_from(&p, &g, a);
 
     // A sends p, g, A to M, M knows A = g ^ a, g
 
     // M sends p, 1, A to B
     // B genetrate skey
-    let b = uinf::gen();
+    let b = uinf::from_bytes_be(&rand!(4));
     let b_key = DHKey::new_from(&p, &uinf::one(), b);
 
     // sk_b = 1 ^ b mod p = 1
@@ -45,14 +47,14 @@ fn test_dh_mitm_g_p() {
     let g = uinf::from_u8(2).unwrap();
 
     // A generate skey
-    let a = uinf::gen();
+    let a = uinf::from_bytes_be(&rand!(4));
     let a_key = DHKey::new_from(&p, &g, a);
 
     // A sends p, g, A to M, M knows A = g ^ a, g
 
     // M sends p, p, A to B
     // B genetrate skey
-    let b = uinf::gen();
+    let b = uinf::from_bytes_be(&rand!(4));
     let b_key = DHKey::new_from(&p, &p, b);
 
     // sk_b = p ^ b mod p = 0
@@ -81,7 +83,7 @@ fn test_dh_mitm_g_p_dec_1() {
     let g = uinf::from_u8(2).unwrap();
 
     // A generate skey
-    let a = uinf::gen();
+    let a = uinf::from_bytes_be(&rand!(4));
     let a_key = DHKey::new_from(&p, &g, a);
 
     // A sends p, g, A to M, M knows A = g ^ a, g
@@ -89,7 +91,7 @@ fn test_dh_mitm_g_p_dec_1() {
     // M sends p, p - 1, p - 1 to B
     // B genetrate skey
     let g_ = p.clone() - uinf::one();
-    let b = uinf::gen();
+    let b = uinf::from_bytes_be(&rand!(4));
     let b_key = DHKey::new_from(&p, &g_, b);
 
     // sk_b = (p - 1) ^ b mod p = -1 or 1

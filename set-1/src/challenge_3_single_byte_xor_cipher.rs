@@ -6,7 +6,7 @@ pub fn crack_key(data: &[u8]) -> (u8, String) {
     let mut scores = [0.0; 256];
     for (i, item) in scores.iter_mut().enumerate() {
         let key: Vec<u8> = vec![i as u8; data.len()];
-        *item = score(&xor(&data, &key));
+        *item = score(&xor(data, &key));
     }
     let mut max_idx = 0;
     for i in 0..256 {
@@ -16,7 +16,7 @@ pub fn crack_key(data: &[u8]) -> (u8, String) {
     }
     (
         max_idx as u8,
-        String::from_utf8(xor(&data, &vec![max_idx as u8; data.len()]))
+        String::from_utf8(xor(data, &vec![max_idx as u8; data.len()]))
             .unwrap_or_else(|_| "Failed!".to_string()),
     )
 }

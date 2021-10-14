@@ -1,4 +1,6 @@
 use num_traits::{FromPrimitive, Zero};
+use rand::Rng;
+use set_2::rand;
 use set_4::challenge_28_sha1_mac::sha1;
 use set_5::challenge_33_dh::*;
 
@@ -8,11 +10,11 @@ fn test_dh_mitm() {
     let g = uinf::from_u8(2).unwrap();
 
     // A generate skey
-    let a = uinf::gen();
+    let a = uinf::from_bytes_be(&rand!(4));
     let a_key = DHKey::new_from(&p, &g, a);
 
     // B genetrate skey
-    let b = uinf::gen();
+    let b = uinf::from_bytes_be(&rand!(4));
     let b_key = DHKey::new_from(&p, &g, b);
 
     // A sends p, g, A to M, M knows g ^ a

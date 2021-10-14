@@ -1,4 +1,6 @@
 use num_traits::FromPrimitive;
+use rand::Rng;
+use set_2::rand;
 use set_5::challenge_33_dh::*;
 
 #[test]
@@ -20,8 +22,8 @@ fn test_dh_toy() {
 fn test_dh_nist() {
     let p = &NIST_P;
     let g = uinf::from_u8(2).unwrap();
-    let a = uinf::gen();
-    let b = uinf::gen();
+    let a = uinf::from_bytes_be(&rand!(4));
+    let b = uinf::from_bytes_be(&rand!(4));
     let a_key = DHKey::new_from(&p, &g, a);
     let b_key = DHKey::new_from(&p, &g, b);
 

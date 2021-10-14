@@ -7,7 +7,7 @@ pub fn aes_cbc_encrypt(plaintext: &[u8], key: &[u8], iv: &[u8]) -> Vec<u8> {
     let cipher = AES::new(key);
 
     for block in plaintext.chunks(16) {
-        let block = cipher.encrypt(&xor(&block, &last));
+        let block = cipher.encrypt(&xor(block, &last));
         ciphertext.push(block[0..16].to_vec());
         last = block.to_vec();
     }

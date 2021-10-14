@@ -26,7 +26,7 @@ pub fn aes_ctr_encrypt(plaintext: &[u8], key: &[u8], nounce: u64) -> Vec<u8> {
     for i in 0..(plaintext.len() / 16 + 1) as u64 {
         keystream.push(cipher.encrypt(&counter.when(i)))
     }
-    xor(&plaintext, &keystream.concat())
+    xor(plaintext, &keystream.concat())
 }
 
 pub fn aes_ctr_decrypt(ciphertext: &[u8], key: &[u8], nounce: u64) -> Vec<u8> {

@@ -69,7 +69,7 @@ impl ToString for Pair {
             Pair(key, ValueItem::Bool(false)) => key.to_string() + "=false",
             Pair(key, ValueItem::Integer(value)) => key.to_string() + "=" + &value.to_string(),
             Pair(key, ValueItem::Float(value)) => key.to_string() + "=" + &value.to_string(),
-            Pair(key, ValueItem::String(value)) => key.to_string() + "=" + &value,
+            Pair(key, ValueItem::String(value)) => key.to_string() + "=" + value,
         }
     }
 }

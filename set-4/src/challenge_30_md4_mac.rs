@@ -51,7 +51,7 @@ pub fn md4_continue(msg: &[u32], buffer: (u32, u32, u32, u32)) -> (u32, u32, u32
     let mut x = [0u32; 16];
 
     for m in msg.chunks(16) {
-        x.clone_from_slice(&m);
+        x.clone_from_slice(m);
         let (aa, bb, cc, dd) = h;
         // Round 1
         for i in 0..4 {
