@@ -3,10 +3,8 @@ use num_bigint::{BigInt, BigUint};
 
 #[allow(non_camel_case_types)]
 pub type uinf = BigUint;
-
 #[allow(non_camel_case_types)]
-#[derive(Debug, PartialEq, Num, NumOps, FromPrimitive, ToPrimitive, One, Zero)]
-pub struct iinf(BigInt);
+pub type iinf = BigInt;
 
 pub fn mod_exp(modulo: uinf, base: uinf, exp: uinf) -> uinf {
     base.modpow(&exp, &modulo)

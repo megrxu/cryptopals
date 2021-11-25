@@ -4,7 +4,7 @@ use rand::Rng;
 use set_1::challenge_7_aes_ecb::aes_ecb_encrypt;
 use std::collections::HashSet;
 
-/// Modified from https://github.com/quininer/aes/blob/master/tests/rand.rs
+/// Modified from <https://github.com/quininer/aes/blob/master/tests/rand.rs>
 
 #[macro_export]
 macro_rules! rand {

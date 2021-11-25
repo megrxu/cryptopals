@@ -51,11 +51,7 @@ pub type Packet = (Option<uinf>, Vec<u8>);
 
 impl Default for SSRPConfig {
     fn default() -> Self {
-        SSRPConfig {
-            p: NIST_P.clone(),
-            g: uinf::from_u64(2).unwrap(),
-            salt: rand!(16),
-        }
+        SSRPConfig { p: NIST_P.clone(), g: uinf::from_u64(2).unwrap(), salt: rand!(16) }
     }
 }
 
@@ -83,7 +79,6 @@ impl SSRPClient {
     }
 
     pub fn compute(&self, uvec: &[u8], server_pub: uinf) -> Vec<u8> {
-        let g = &self.config.g;
         let p = &self.config.p;
         let a = &self.private_key;
 
@@ -122,7 +117,7 @@ impl SSRPServer {
         let p = &self.config.p;
         let b = &self.private_key;
         let v = &self.verifier;
-        let u = uinf::from_bytes_be(&uvec);
+        let u = uinf::from_bytes_be(uvec);
 
         // S = (A * v ** u)**b % n
         let s = (client_pub * v.modpow(&u, p)).modpow(b, p);
@@ -162,7 +157,7 @@ impl SSRPInstance {
     ) -> SSRPStatus {
         match (&self.status, &wire) {
             (SSRPStatus::ServerInit, SSRPWire::ClientToServer) => match data {
-                (Some(client_pub), _) => {
+                (Some(_), _) => {
                     self.status = SSRPStatus::ServerReady;
                     self.status.clone()
                 }
