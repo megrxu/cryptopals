@@ -31,8 +31,8 @@ jobs:
         with:
           command: test
 
-  clippy:
-    name: Clippy
+  doc:
+    name: Docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,8 +41,14 @@ jobs:
           profile: minimal
           toolchain: nightly
           override: true
-      - run: rustup component add clippy
       - uses: actions-rs/cargo@v1
         with:
-          command: clippy
-          args: -- -D warnings
+          command: doc 
+          args: --no-deps
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+          commit_message: ${{ github.event.head_commit.message }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

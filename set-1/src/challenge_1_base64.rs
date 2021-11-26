@@ -7,6 +7,18 @@ lazy_static! {
         b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 }
 
+/// Encode a byte array to base64
+/// ```rust
+/// use set_1::challenge_1_base64::base64_encode;
+/// use hex_literal::hex;
+/// 
+/// assert_eq!(
+/// base64_encode(&hex!(
+///     "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
+/// )),
+/// "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
+/// );
+/// ```
 pub fn base64_encode(data: &[u8]) -> String {
     let mut base64_bytes: Vec<Vec<u8>> = vec![];
     let mut data_vec = data.to_vec();
