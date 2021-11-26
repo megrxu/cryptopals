@@ -210,8 +210,8 @@ pub struct RsaPrivateKey {
 
 #[derive(Clone, PartialEq, Debug)]
 pub struct RsaPublicKey {
-    e: uinf,
-    n: uinf,
+    pub e: uinf,
+    pub n: uinf,
 }
 
 /// ```rust
@@ -229,7 +229,7 @@ impl RSA {
     pub fn keygen(e: u64, bits: u64) -> (RsaPrivateKey, RsaPublicKey) {
         let mut rng = rand::thread_rng();
         let dist = ProbablyPrimeDistribution(bits);
-        let res = loop {
+        loop {
             let (p, q) = (dist.sample(&mut rng), dist.sample(&mut rng));
             let n = p.clone() * q.clone();
             let et = (p - uinf::one()) * (q - uinf::one());
@@ -238,9 +238,7 @@ impl RSA {
             if !d.is_zero() {
                 break (RsaPrivateKey { d, n: n.clone() }, RsaPublicKey { e: e_, n });
             }
-        };
-        println!("{:?}", res);
-        res
+        }
     }
 
     pub fn encrypt(pubkey: &RsaPublicKey, m: &uinf) -> uinf {
