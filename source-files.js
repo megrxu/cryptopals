@@ -4,4 +4,5 @@ sourcesIndex["set_2"] = {"name":"","files":["challenge_10_aes_cbc.rs","challenge
 sourcesIndex["set_3"] = {"name":"","files":["challenge_17_cbc_padding.rs","challenge_18_ctr_mode.rs","challenge_19_fixed_nonce_ctr.rs","challenge_21_mersenne_twister.rs","challenge_23_clone_mt.rs","challenge_24_mt_stream_cipher.rs","lib.rs"]};
 sourcesIndex["set_4"] = {"name":"","files":["challenge_25_rawctr.rs","challenge_26_ctr_bitflipping.rs","challenge_27_cbc_key_as_iv.rs","challenge_28_sha1_mac.rs","challenge_30_md4_mac.rs","challenge_31_hmac.rs","lib.rs"]};
 sourcesIndex["set_5"] = {"name":"","files":["challenge_33_dh.rs","challenge_36_srp.rs","challenge_38_ssrp.rs","challenge_39_rsa.rs","lib.rs"]};
+sourcesIndex["set_6"] = {"name":"","files":["challenge_41_rsa_armoring.rs","lib.rs"]};
 createSourceSidebar();
