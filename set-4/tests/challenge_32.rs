@@ -21,6 +21,7 @@ fn insecure_compare(a: &[u8], b: &[u8]) -> (bool, usize) {
 }
 
 #[test]
+#[ignore]
 fn exploit_less_timing_leak() {
     let key = rand!(16);
     let file = rand!(rand!(choose 100..1000));
@@ -50,7 +51,7 @@ fn exploit_less_timing_leak() {
             .map(|n| {
                 mutation[i] = n;
                 let r = insecure_compare(&mutation, &target).0;
-                let m = (0..10)
+                let m = (0..100)
                     .map(|_| insecure_compare(&mutation, &target))
                     .fold(0, |res, (_, k)| res + k);
                 (n, (r, m))

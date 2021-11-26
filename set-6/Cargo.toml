@@ -1,8 +1,7 @@
 [package]
-name = "set-4"
+name = "set-6"
 version = "0.1.0"
-authors = ["Ray Xu <megrxu@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -10,6 +9,10 @@ edition = "2018"
 set-1 = {path="../set-1/"}
 set-2 = {path="../set-2/"}
 set-3 = {path="../set-3/"}
-eva-crypto = "*"
+set-4 = {path="../set-4/"}
+set-5 = {path="../set-5/"}
+num-bigint = { version = "0.4", features = ["rand"] }
+num-traits = "0.2"
+num-derive = "0.3"
+num-integer = "0.1"
 rand = "0.8.0"
-hex-literal = "*"

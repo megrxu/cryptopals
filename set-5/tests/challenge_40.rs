@@ -1,4 +1,3 @@
-use num_integer::Roots;
 use num_traits::FromPrimitive;
 use set_5::challenge_33_dh::uinf;
 use set_5::challenge_39_rsa::{ModInv, RSA};
