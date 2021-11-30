@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RsaSimpleInstanceError",""]],"struct":[["RsaSimpleInstance",""]]});
+initSidebarItems({"enum":[["RsaInstanceError",""]],"struct":[["RsaConfig",""],["RsaInstance",""]]});
