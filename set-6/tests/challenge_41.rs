@@ -5,7 +5,7 @@ use set_6::challenge_41_rsa_armoring::*;
 
 #[test]
 fn unpadded_message_recovery_oracle() {
-    let mut instance = RsaSimpleInstance::new();
+    let mut instance = RsaInstance::default();
 
     let rng = &mut rand::thread_rng();
 
@@ -20,10 +20,9 @@ fn unpadded_message_recovery_oracle() {
     let c_uinf = uinf::from_bytes_be(&c);
     let s = rng.gen_biguint(64);
     let c_prime = s.clone().modpow(&e, &n) * c_uinf % &n;
-    let c_ = c_prime.to_bytes_be();
 
-    let m_prime = instance.decrypt(&c_).unwrap();
-    let m_ = (uinf::from_bytes_be(&m_prime) * s.modinv(&n) % &n).to_bytes_be();
+    let m_prime = instance.privkey.raw_decrypt(&c_prime);
+    let m_ = (m_prime * s.modinv(&n) % &n).to_bytes_be();
 
     assert_eq!(m, &m_[..]);
 }

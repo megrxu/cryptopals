@@ -214,6 +214,25 @@ pub struct RsaPublicKey {
     pub n: uinf,
 }
 
+impl RsaPublicKey {
+    pub fn raw_encrypt(&self, m: &uinf) -> uinf {
+        m.modpow(&self.e, &self.n)
+    }
+
+    pub fn bits(&self) -> u64 {
+        self.n.bits()
+    }
+}
+
+impl RsaPrivateKey {
+    pub fn raw_decrypt(&self, c: &uinf) -> uinf {
+        c.modpow(&self.d, &self.n)
+    }
+    pub fn bits(&self) -> u64 {
+        self.n.bits()
+    }
+}
+
 /// ```rust
 /// use set_5::challenge_39_rsa::{RSA, RsaPrivateKey, RsaPublicKey};
 /// use set_5::challenge_33_dh::uinf;
@@ -221,8 +240,8 @@ pub struct RsaPublicKey {
 ///
 /// let (privkey, pubkey) = RSA::keygen(3, 64);
 /// let m = uinf::from_u64(42).unwrap();
-/// let c = RSA::encrypt(&pubkey, &m);
-/// let m_ = RSA::decrypt(&privkey, &c);
+/// let c  = pubkey.raw_encrypt(&m);
+/// let m_ = privkey.raw_decrypt(&c);
 /// assert_eq!(m_, m);
 /// ```
 impl RSA {
@@ -239,13 +258,5 @@ impl RSA {
                 break (RsaPrivateKey { d, n: n.clone() }, RsaPublicKey { e: e_, n });
             }
         }
-    }
-
-    pub fn encrypt(pubkey: &RsaPublicKey, m: &uinf) -> uinf {
-        m.modpow(&pubkey.e, &pubkey.n)
-    }
-
-    pub fn decrypt(privkey: &RsaPrivateKey, c: &uinf) -> uinf {
-        c.modpow(&privkey.d, &privkey.n)
     }
 }

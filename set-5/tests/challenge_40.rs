@@ -10,9 +10,9 @@ fn rsa_broadcast_attack() {
 
     let m = uinf::from_u64(42).unwrap();
 
-    let c_0 = &RSA::encrypt(&pub_0, &m);
-    let c_1 = &RSA::encrypt(&pub_1, &m);
-    let c_2 = &RSA::encrypt(&pub_2, &m);
+    let c_0 = pub_0.raw_encrypt(&m);
+    let c_1 = pub_1.raw_encrypt(&m);
+    let c_2 = pub_2.raw_encrypt(&m);
 
     let ms_0 = pub_1.n.clone() * pub_2.n.clone();
     let ms_1 = pub_0.n.clone() * pub_2.n.clone();
