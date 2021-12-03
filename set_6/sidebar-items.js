@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["challenge_41_rsa_armoring",""],["challenge_42_pkcs1",""]]});
+initSidebarItems({"mod":[["challenge_41_rsa_armoring",""],["challenge_42_pkcs1",""],["challenge_43_dsa",""]]});
