@@ -95,3 +95,15 @@ impl Default for DSA {
         DSA { p, q, g }
     }
 }
+
+pub fn recover_key(nonce: &uinf, r: &uinf, s: &uinf, hm: &uinf, q: &uinf) -> uinf {
+    let r_ = r.modinv(q);
+    let mut res: uinf = s.clone() * nonce;
+    let s_ = loop {
+        if &res > hm {
+            break res - hm;
+        }
+        res += q;
+    };
+    r_ * s_ % q
+}

@@ -1,4 +1,5 @@
 use hex_literal::hex;
+use set_4::challenge_28_sha1_mac::sha1;
 use set_5::challenge_33_dh::uinf;
 use set_5::challenge_39_rsa::ModInv;
 use set_6::challenge_43_dsa::*;
@@ -22,19 +23,6 @@ fn dsa_key_recovery_from_nonce() {
     // The signature is valid
     assert!(dsa.raw_verify(&pubkey, &hm, &sig));
 
-    // The closure to recover the key
-    let _recover_key = |nonce: &uinf, r: &uinf, s: &uinf, hm: &uinf, q: &uinf| -> uinf {
-        let r_ = r.modinv(q);
-        let mut res: uinf = s.clone() * nonce;
-        let s_ = loop {
-            if &res > hm {
-                break res - hm;
-            }
-            res += q;
-        };
-        r_ * s_ % q
-    };
-
     // Took ~97 seconds to find the private key
     // let mut k = uinf::from_bytes_be(&[]).unwrap();
     // for i in 0..2 << 16 {
@@ -44,11 +32,12 @@ fn dsa_key_recovery_from_nonce() {
     //         break;
     //     }
     // }
-    let privkey = uinf::from_bytes_be(&[
-        0x15, 0xfb, 0x28, 0x73, 0xd1, 0x6b, 0x3e, 0x12, 0x9f, 0xf7, 0x6d, 0x09, 0x18, 0xfd, 0x7a,
-        0xda, 0x54, 0x65, 0x9e, 0x49,
-    ]);
+    let privkey_bytes = hex!("15fb2873d16b3e129ff76d0918fd7ada54659e49");
+    let privkey = uinf::from_bytes_be(&privkey_bytes);
 
-    assert_eq!(dsa.g.modpow(&privkey, &dsa.p), pubkey);
+    assert_eq!(
+        sha1(b"15fb2873d16b3e129ff76d0918fd7ada54659e49"),
+        hex!("0954edd5e0afe5542a4adf012611a91912a3ec16")
+    );
     assert!(dsa.raw_verify(&pubkey, &hm, &dsa.raw_sign(&privkey, &hm)));
 }
