@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["DSA",""]]});
+initSidebarItems({"fn":[["recover_key",""]],"struct":[["DSA",""]]});
