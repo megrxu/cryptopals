@@ -53,14 +53,10 @@ impl DSA {
 
     pub fn raw_sign_with_bits(&self, bits: u64, privkey: &uinf, hm: &uinf) -> (uinf, uinf) {
         let mut rng = rand::thread_rng();
-        loop {
-            let k = rng.gen_biguint(bits) % &self.q;
-            let r = self.g.modpow(&k, &self.p) % &self.q;
-            let s = (k.modinv(&self.q) * (hm + privkey * &r)) % &self.q;
-            if !k.is_zero() || !r.is_zero() && !s.is_zero() {
-                return (r, s);
-            }
-        }
+        let k = rng.gen_biguint(bits) % &self.q;
+        let r = self.g.modpow(&k, &self.p) % &self.q;
+        let s = (k.modinv(&self.q) * (hm + privkey * &r)) % &self.q;
+        (r, s)
     }
 
     pub fn raw_sign(&self, privkey: &uinf, hm: &uinf) -> (uinf, uinf) {
