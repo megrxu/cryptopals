@@ -1,7 +1,6 @@
 use hex_literal::hex;
 use set_4::challenge_28_sha1_mac::sha1;
 use set_5::challenge_33_dh::uinf;
-use set_5::challenge_39_rsa::ModInv;
 use set_6::challenge_43_dsa::*;
 
 #[test]
