@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["md4",""],["md4_continue",""],["md4_mac",""]]});
+window.SIDEBAR_ITEMS = {"fn":["md4","md4_continue","md4_mac"]};

@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["repeating_key_xor_cipher",""]]});
+window.SIDEBAR_ITEMS = {"fn":["repeating_key_xor_cipher"]};

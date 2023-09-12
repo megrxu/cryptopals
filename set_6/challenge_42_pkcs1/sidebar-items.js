@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RsaPKCS1SignatureError",""]],"struct":[["RsaPKCS1Signature",""]]});
+window.SIDEBAR_ITEMS = {"enum":["RsaPKCS1SignatureError"],"struct":["RsaPKCS1Signature"]};

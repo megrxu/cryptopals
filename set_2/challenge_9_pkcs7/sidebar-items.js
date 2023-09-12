@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["pkcs7_padding",""]]});
+window.SIDEBAR_ITEMS = {"fn":["pkcs7_padding"]};

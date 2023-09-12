@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["pkcs7_unpadding",""]],"struct":[["PaddingError",""]]});
+window.SIDEBAR_ITEMS = {"fn":["pkcs7_unpadding"],"struct":["PaddingError"]};

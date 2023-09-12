@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["crack_key",""]]});
+window.SIDEBAR_ITEMS = {"fn":["crack_key"]};

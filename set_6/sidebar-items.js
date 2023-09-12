@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["challenge_41_rsa_armoring",""],["challenge_42_pkcs1",""],["challenge_43_dsa",""]]});
+window.SIDEBAR_ITEMS = {"mod":["challenge_41_rsa_armoring","challenge_42_pkcs1","challenge_43_dsa"]};

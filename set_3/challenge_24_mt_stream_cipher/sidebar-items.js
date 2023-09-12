@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["TrivialStreamCipher",""]]});
+window.SIDEBAR_ITEMS = {"struct":["TrivialStreamCipher"]};

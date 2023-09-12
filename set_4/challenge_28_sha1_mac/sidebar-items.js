@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Endian",""]],"fn":[["from_u32_vec",""],["sha1",""],["sha1_continue",""],["sha1_mac",""],["sha1_padding",""],["to_u32_vec",""],["to_vec",""]]});
+window.SIDEBAR_ITEMS = {"enum":["Endian"],"fn":["from_u32_vec","sha1","sha1_continue","sha1_mac","sha1_padding","to_u32_vec","to_vec"]};

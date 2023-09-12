@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RsaInstanceError",""]],"struct":[["RsaConfig",""],["RsaInstance",""]]});
+window.SIDEBAR_ITEMS = {"enum":["RsaInstanceError"],"struct":["RsaConfig","RsaInstance"]};

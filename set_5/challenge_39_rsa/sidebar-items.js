@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["MillerRabinStatus",""]],"fn":[["miller_rabin_test","Miller-Rabin primality test"],["probably_prime",""]],"struct":[["ProbablyPrimeDistribution",""],["RSA",""],["RsaPrivateKey",""],["RsaPublicKey",""]],"trait":[["ModInv",""]]});
+window.SIDEBAR_ITEMS = {"enum":["MillerRabinStatus"],"fn":["miller_rabin_test","probably_prime"],"struct":["ProbablyPrimeDistribution","RSA","RsaPrivateKey","RsaPublicKey"],"trait":["ModInv"]};

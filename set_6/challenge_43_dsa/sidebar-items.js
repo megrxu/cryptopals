@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["recover_key",""]],"struct":[["DSA",""]]});
+window.SIDEBAR_ITEMS = {"fn":["recover_key"],"struct":["DSA"]};

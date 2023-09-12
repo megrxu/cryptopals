@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["aes_ecb_decrypt",""],["aes_ecb_encrypt",""]]});
+window.SIDEBAR_ITEMS = {"fn":["aes_ecb_decrypt","aes_ecb_encrypt"]};

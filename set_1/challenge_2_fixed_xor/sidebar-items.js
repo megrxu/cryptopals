@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["xor",""]]});
+window.SIDEBAR_ITEMS = {"fn":["xor"]};

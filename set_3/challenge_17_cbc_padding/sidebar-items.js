@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["choose_one",""]],"struct":[["EncryptionOracle",""]]});
+window.SIDEBAR_ITEMS = {"fn":["choose_one"],"struct":["EncryptionOracle"]};

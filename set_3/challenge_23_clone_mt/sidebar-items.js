@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["untamper",""]]});
+window.SIDEBAR_ITEMS = {"fn":["untamper"]};

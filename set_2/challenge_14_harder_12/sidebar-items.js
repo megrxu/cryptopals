@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["EncryptionOracle",""]]});
+window.SIDEBAR_ITEMS = {"struct":["EncryptionOracle"]};

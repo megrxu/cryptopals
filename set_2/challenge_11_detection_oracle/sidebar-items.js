@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["distinguisher",""],["encryption_oracle",""]]});
+window.SIDEBAR_ITEMS = {"fn":["distinguisher","encryption_oracle"]};

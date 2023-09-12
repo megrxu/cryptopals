@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["SRPStatus",""],["SRPWire",""]],"struct":[["SRPClient",""],["SRPConfig",""],["SRPInstance",""],["SRPServer",""]],"type":[["Packet",""]]});
+window.SIDEBAR_ITEMS = {"enum":["SRPStatus","SRPWire"],"struct":["SRPClient","SRPConfig","SRPInstance","SRPServer"],"type":["Packet"]};

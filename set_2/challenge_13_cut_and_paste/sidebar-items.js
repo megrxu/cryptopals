@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["decode",""],["encode",""],["profile_for",""]],"struct":[["Pair",""],["ParsePairError",""]]});
+window.SIDEBAR_ITEMS = {"fn":["decode","encode","profile_for"],"struct":["Pair","ParsePairError"]};

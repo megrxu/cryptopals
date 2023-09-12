@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["hmac",""]]});
+window.SIDEBAR_ITEMS = {"fn":["hmac"]};

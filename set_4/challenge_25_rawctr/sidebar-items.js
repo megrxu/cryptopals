@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["edit",""]]});
+window.SIDEBAR_ITEMS = {"fn":["edit"]};
