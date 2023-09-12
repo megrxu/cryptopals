@@ -42,7 +42,7 @@ fn attack_ssrp() {
     ];
     let mut rng = rand::thread_rng();
     let password = password_candidates.choose(&mut rng).unwrap();
-    let mut instance = SSRPInstance::init(&rand!(16), &password);
+    let mut instance = SSRPInstance::init(&rand!(16), password);
 
     // Malicious server set salt to 0
     instance.config = SSRPConfig::new(NIST_P.clone(), uinf::from_u64(2).unwrap(), vec![]);
@@ -80,5 +80,5 @@ fn attack_ssrp() {
         .collect::<Vec<Vec<u8>>>();
 
     // And the client-generated token must be in these tokens, which implies the password
-    assert_eq!(tokens_to_check.contains(&token), true);
+    assert!(tokens_to_check.contains(&token));
 }

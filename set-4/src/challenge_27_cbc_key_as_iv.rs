@@ -10,7 +10,7 @@ pub struct EncryptionOracle {
 impl EncryptionOracle {
     pub fn init() -> Self {
         let key = rand!(16);
-        let iv = (&key).clone(); // use key as iv
+        let iv = key.clone(); // use key as iv
         EncryptionOracle { key, iv }
     }
 

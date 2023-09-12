@@ -7,7 +7,7 @@ fn test_input() {
     let userdata = b"aaaabbbbccccdddd";
 
     let mut c = oracle.encrypt(userdata);
-    assert_eq!(oracle.is_admin(&c), false);
+    assert!(!oracle.is_admin(&c));
 
     // get the length
     let c1 = oracle.encrypt(b"1");

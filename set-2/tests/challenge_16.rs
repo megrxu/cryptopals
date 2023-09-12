@@ -7,7 +7,7 @@ fn test_input() {
 
     let mut c = oracle.encrypt(b"aaaabbbbccccdddd");
     println!("{:?}", String::from_utf8(oracle.decrypt(&c)));
-    assert_eq!(oracle.is_admin(&c), false);
+    assert!(!oracle.is_admin(&c));
 
     // modify the ciphertext
     let before = b"aaaabbbbccccdddd";

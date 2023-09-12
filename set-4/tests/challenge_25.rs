@@ -37,7 +37,7 @@ fn challenge_25() {
     let key: Vec<u8> = rand!(16);
     let mut rng = thread_rng();
     let nounce = rng.next_u64();
-    let mut ciphertext = aes_ctr_encrypt(&data, &key, nounce);
+    let mut ciphertext = aes_ctr_encrypt(data, &key, nounce);
 
     // expose the API to attacker
     let c_origin = ciphertext.to_vec();

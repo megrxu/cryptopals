@@ -15,7 +15,7 @@ fn try_decrypt() {
         .map(|line| oracle.encrypt(&base64_decode(&line.unwrap())))
         .collect();
     let mut set = vec![];
-    let num = vec![5, 6, 11, 10, 8, 7, 7, 6];
+    let num = [5, 6, 11, 10, 8, 7, 7, 6];
     for idx in 0..8 {
         let mut char_map: BTreeMap<u8, usize> = BTreeMap::new();
         for c in cs.iter() {
@@ -23,7 +23,7 @@ fn try_decrypt() {
                 continue;
             }
             let cur = c.get(idx).unwrap();
-            if let Some(size) = char_map.get_mut(&cur) {
+            if let Some(size) = char_map.get_mut(cur) {
                 *size += 1;
             } else {
                 char_map.insert(*cur, 1);

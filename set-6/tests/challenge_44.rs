@@ -40,7 +40,7 @@ fn dsa_nonce_recovery_from_repeated_nouce() {
     let mut meet = vec![];
     let (mut i_0, mut i_1) = (0, 0);
     for (i, (_, s, r, hm)) in signatures.iter().enumerate() {
-        assert!(dsa.raw_verify(&pubkey, &hm, &(r.clone(), s.clone())));
+        assert!(dsa.raw_verify(&pubkey, hm, &(r.clone(), s.clone())));
         if let Some(j) = meet.iter().position(|item: &uinf| r == item) {
             i_0 = i;
             i_1 = j;
@@ -56,7 +56,7 @@ fn dsa_nonce_recovery_from_repeated_nouce() {
 
     assert!(dsa.raw_verify(&pubkey, &hm0, &dsa.raw_sign(&privkey, &hm0)));
     assert_eq!(
-        sha1(&privkey.to_str_radix(16).as_bytes()),
+        sha1(privkey.to_str_radix(16).as_bytes()),
         hex!("ca8f6f7c66fa362d40760d135b763eb8527d3d52")
     );
 }

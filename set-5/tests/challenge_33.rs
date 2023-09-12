@@ -24,8 +24,8 @@ fn test_dh_nist() {
     let g = uinf::from_u8(2).unwrap();
     let a = uinf::from_bytes_be(&rand!(4));
     let b = uinf::from_bytes_be(&rand!(4));
-    let a_key = DHKey::new_from(&p, &g, a);
-    let b_key = DHKey::new_from(&p, &g, b);
+    let a_key = DHKey::new_from(p, &g, a);
+    let b_key = DHKey::new_from(p, &g, b);
 
     let sk_a = a_key.key_exchange(&b_key.pkey);
     let sk_b = b_key.key_exchange(&a_key.pkey);

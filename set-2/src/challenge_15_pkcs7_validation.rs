@@ -25,5 +25,5 @@ pub fn pkcs7_unpadding(data: &[u8], block_size: usize) -> Result<Vec<u8>, Paddin
             return Err(PaddingError);
         }
     }
-    Ok(vec![others, &last_vec].concat())
+    Ok([others, &last_vec].concat())
 }

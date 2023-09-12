@@ -1,4 +1,4 @@
-use hex;
+
 use hex_literal::hex as hex_literal;
 use std::collections::HashSet;
 use std::fs::File;

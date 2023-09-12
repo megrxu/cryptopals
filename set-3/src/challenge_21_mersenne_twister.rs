@@ -61,7 +61,7 @@ impl MTRNG {
         let x = Wrapping(F);
         for i in 1..N {
             let y = Wrapping(mt[i - 1] ^ (mt[i - 1] >> (W - 2)));
-            mt[i] = (x * y + Wrapping(i as u32)).0 as u32;
+            mt[i] = (x * y + Wrapping(i as u32)).0;
         }
     }
 
