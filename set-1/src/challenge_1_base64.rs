@@ -1,4 +1,4 @@
-use base64 as bs64;
+use base64::{engine::general_purpose, Engine};
 use lazy_static::lazy_static;
 
 // implement base64 encode by hand
@@ -51,5 +51,5 @@ pub fn base64_encode(data: &[u8]) -> String {
 
 // base64 decode using a crate
 pub fn base64_decode(base64_str: &str) -> Vec<u8> {
-    bs64::decode(base64_str).unwrap()
+    general_purpose::STANDARD.decode(base64_str).unwrap()
 }

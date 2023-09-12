@@ -17,7 +17,7 @@ fn get_signatures() -> Vec<(Vec<u8>, uinf, uinf, uinf)> {
         let r = &lines.next().unwrap().unwrap()[3..].parse::<uinf>().unwrap();
         let k = &lines.next().unwrap().unwrap()[3..];
         let hm = {
-            if k.len() % 2usize == 1 { String::from("0") + k.clone() } else { k.to_string() }
+            if k.len() % 2usize == 1 { String::from("0") + k } else { k.to_string() }
         };
         let m = uinf::from_str_radix(&hm, 16).unwrap();
         res.push((msg, s.clone(), r.clone(), m.clone()));

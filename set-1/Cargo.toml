@@ -7,7 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-hex-literal = "0.2.2"
+hex-literal = "0.4.1"
 hex = "*"
 lazy_static = "1.4.0"
 base64 = "*"

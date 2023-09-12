@@ -16,7 +16,10 @@ fn encrypt_and_decrypt() {
 }
 
 fn generate_input() -> Vec<u8> {
-    let head: String = thread_rng().sample_iter(&Alphanumeric).take(rand!(choose 5..10)).collect();
+    let head = String::from_utf8_lossy(
+        &thread_rng().sample_iter(&Alphanumeric).take(rand!(choose 5..10)).collect::<Vec<u8>>(),
+    )
+    .to_string();
     (head + "AAAAAAAAAAAAAA").as_bytes().to_vec()
 }
 

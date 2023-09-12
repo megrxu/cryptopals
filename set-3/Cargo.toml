@@ -10,6 +10,6 @@ edition = "2021"
 set-1 = {path="../set-1/"}
 set-2 = {path="../set-2/"}
 eva-crypto = "*"
-rand = "0.7.3"
+rand = "0.8.5"
 byteorder = "1.4.3"
 chrono = "0.4.30"
